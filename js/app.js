@@ -47,7 +47,7 @@ Seguro.prototype.cotizarSeguro = function() {
         }else{
             cantidad *= 1.50;
         }
-        
+
         return cantidad;
 
 }
@@ -92,6 +92,18 @@ UI.prototype.mostrarMensaje = (mensaje,tipo) => {
     }, 3000);
 }
 
+UI.prototype.mostrarResultado = (seguro,total) => {
+    // Crear el resultado
+    const div = document.createElement('div');
+    div.classList.add('mt-10');
+    div.innerHTML = `
+    <p class= "header"> Tu Resumen </p>
+    <p class= "font-bold"> Totaal: ${total} </p>
+    `;
+
+    const resultadoDiv = document.querySelector('#resultado');
+    resultadoDiv.appendChild(div);
+}
 
 //Instanciar UI
 const ui = new UI();
@@ -133,11 +145,12 @@ function cotizarSeguro(e){
     // Instanciar el seguro
 
     const seguro = new Seguro(marca,year,tipo);
-    seguro.cotizarSeguro();
+    const total = seguro.cotizarSeguro();
 
     // console.log(seguro);
 
     // Utilizar el prototype que va a cotizar
+    ui.mostrarResultado(seguro,total);
 
 }
 
