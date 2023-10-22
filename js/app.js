@@ -5,6 +5,36 @@ function Seguro(marca,year,tipo){
     this.tipo = tipo;
 }
 
+// Realiza la cotización con los datos
+Seguro.prototype.cotizarSeguro = function() {
+    /* 
+        1 = Americanao 1.15
+        2 = Asiatico 1.05
+        3 = Europeo 1.35
+    */
+
+        let cantidad;
+        const base = 2000;
+
+        console.log(this.marca);
+        switch(this.marca){
+            case '1':
+                cantidad = base * 1.15;
+                break;
+            case '2':
+                cantidad = base * 1.05;
+                break;
+            case '3':
+                cantidad = base * 1.35;
+                break;
+            default:
+                break;
+        }
+
+        console.log(cantidad);
+
+}
+
 function UI(){}
 
 
@@ -48,7 +78,7 @@ UI.prototype.mostrarMensaje = (mensaje,tipo) => {
 
 //Instanciar UI
 const ui = new UI();
-console.log(ui);
+// console.log(ui);
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -74,7 +104,7 @@ function cotizarSeguro(e){
     
     // Leer el tipo de cobertura
     const tipo = document.querySelector('input[name="tipo"]:checked').value;
-    console.log(tipo);
+    // console.log(tipo);
 
     if(marca === '' || year === '' || tipo === ''){
         ui.mostrarMensaje('Todos los campos son obligatorios','error');
@@ -84,6 +114,11 @@ function cotizarSeguro(e){
     ui.mostrarMensaje('Cotizando','exito');
 
     // Instanciar el seguro
+
+    const seguro = new Seguro(marca,year,tipo);
+    seguro.cotizarSeguro();
+
+    // console.log(seguro);
 
     // Utilizar el prototype que va a cotizar
 
