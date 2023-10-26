@@ -16,7 +16,7 @@ Seguro.prototype.cotizarSeguro = function() {
         let cantidad;
         const base = 2000;
 
-        console.log(this.marca);
+        // console.log(this.marca);
         switch(this.marca){
             case '1':
                 cantidad = base * 1.15;
@@ -93,16 +93,40 @@ UI.prototype.mostrarMensaje = (mensaje,tipo) => {
 }
 
 UI.prototype.mostrarResultado = (total,seguro) => {
+
+    const {marca,year,tipo} = seguro;
+
+    let textoMarca;
+
+    switch(marca){
+        case '1':
+            textoMarca = 'Americano';
+            break;
+        case '2':
+            textoMarca = 'Americano';
+            break;
+        case '3':
+            textoMarca = 'Americano';
+            break;
+        default:
+            break;
+    }
+
+
     // Crear el resultado
     const div = document.createElement('div');
     div.classList.add('mt-10');
+
     div.innerHTML = `
     <p class= "header"> Tu Resumen </p>
-    <p class= "font-bold"> Totaal: ${total} </p>
+    <p class= "font-bold"> Marca: <span class="font-normal"> ${textoMarca} </span> </p>
+    <p class= "font-bold"> Año: <span class="font-normal"> ${year} </span> </p>
+    <p class= "font-bold"> Tipo: <span class="font-normal capitalize"> ${tipo} </span> </p>
+    <p class= "font-bold"> Total: <span class="font-normal"> $ ${total} </span> </p>
     `;
 
     const resultadoDiv = document.querySelector('#resultado');
-    resultadoDiv.appendChild(div);
+
 
     // Mostrar el spinner
     const spinner = document.querySelector('#cargando');
